@@ -167,21 +167,12 @@
     }
     .imgbox{
         position: relative;
-        width: 100%;
+        width: 100px;
         height: 100%;
+        border-radius: 10px
     }
     .imgbox img{
         position: relative;
         height: 100%;
-        width: calc(130%-80px);
-        top: 100px;
-        right: 50px;
-        transform: rotateY(180deg);
-        animation: animateUser 10s linear infinite;
     }
-    @keyframes animateUser {
-        50%{
-            right: 10px;
-            top: -10px;
-        }
-    }
+
