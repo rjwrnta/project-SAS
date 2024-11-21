@@ -3,17 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Input Form</title>
     <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+      }
+    </style>
 </head>
 <body>
     <div class="container">
-      <div class="card">
-        <div class="card-body">
-         
-        </div>
-      </div>
-    </div>
+       <!-- Navbar Section Start-->
+       <section>
+        <nav class="navbar bg-body-tertiary mb-5">
+            <div class="container">
+              <a class="navbar-brand" href="#">
+               <img src="img/download-removebg-preview.png" alt="" width="100" height="25">
+              </a>
+              <ul class="nav justify-content-center">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="login.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="input.html">Tambah</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Table.html">Table</a>
+                </li>
+               
+                <li class="nav-item">
+                   <button type="button" class="btn btn-success">Login</button>
+                   <button type="button" class="btn btn-success">Sign In</button>
+                </li>
+              </ul>
+            </div>
+          </nav>
+       </section>
+    <!-- Navbar Section End-->
+     <!-- Input Sction Start -->
+     <section>
+       <div class="card col-9 mx-auto justify-content-center">
+         <div class="card-body">
+          <div class="row-cols-auto" id="step1">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingTitle" placeholder="Jujusu Kaisen Movie 0">
+                <label for="floatingPassword">Title</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingChapter" placeholder="Chapter 1">
+                <label for="floatingPassword">Chapter</label>
+              </div>
+                <div class="form-floating mb-3">
+                  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                    <option selected>Status</option>
+                    <option value="1">On-Going</option>
+                    <option value="2">Complete</option>
+                    <option value="3">Hiatus</option>
+                  </select>
+                  <label for="floatingSelect">Choose</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="date" class="form-control" id="floatingDuration" placeholder="Date">
+                  <label for="floatingDate">Release Date</label>
+                </div>
+                <div class="form-floating mb-1">
+                  <textarea class="form-control" placeholder="Sinopsis Here" id="floatingTextarea2" style="height: 70px"></textarea>
+                  <label for="floatingTextarea2">Sinopsis</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingDuration" placeholder="Writer">
+                  <label for="floatingWriter">Manga Writer</label>
+                </div>
+            </div>
+
+              <div class="row-cols-auto" id="step2">
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" id="floatingChapter-eps" placeholder="Chapter eps">
+                  <label for="floatingEpisode">Chapter per Episode</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="time" class="form-control" id="floatingDuration" placeholder="Duration">
+                  <label for="floatingDuration">Duration</label>
+                </div>
+              </div>
+
+              <div class="row-cols-auto mt-1">
+                <div class="form-floating mb-3">
+                  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                    <option selected>Genre</option>
+                    <option value="1">Comedy</option>
+                    <option value="2">Horor</option>
+                    <option value="3">Action</option>
+                    <option value="4">Sci-Fi</option>
+                    <option value="5">Romance</option>
+                    <option value="6">Slice of Life</option>
+                    <option value="7">Mystery</option>
+                    <option value="8">Harem</option>
+                    <option value="9">Ecchi</option>
+                    <option value="10">Shounen</option>
+                    <option value="11">Adventure</option>
+                    <option value="12">Isekai</option>
+                  </select>
+                  <label for="floatingSelect">Choose</label>
+                </div>
+                <button type="button" class="btn btn-outline-success" id="submit">Submit</button>
+              </div>
+          </div>
+         </div>
+       </div>
+     </div>
+     </section>
+     <!-- Input Section End-->
     <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
