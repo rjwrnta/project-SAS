@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins' sans-serif;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            background: #42455a;
+        }
+        .menu ul{
+            display: inline-flex;
+            margin: 50px;
+        }
+        li{
+            list-style: none;
+        }
+        .menu ul li a{
+           margin: 0 20px;
+           color: #b2b1b1;
+           text-decoration: none;
+           cursor: pointer;
+        }
+        .logo img{ 
+            width: 60px;
+            margin-top: -7px;
+            margin-right: 48px;
+        }
+        .active{
+            color: aqua;
+        }
+        .btn{
+            top: 40px;
+            right: 80px;
+            position: absolute;
+            text-decoration: none;
+            color: #fff;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            background-image: linear-gradient(#42455a,#42455a),radial-gradient(circle at top left,#fd00da,#19d7f8);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+
+        }
+        .btn span{
+            display: block;
+            padding: 8px 22px;
+        }
+        .banner{
+            width: 80%;
+            height: 70%;
+            top: 25%;
+            left: 130px;
+            position: absolute;
+            color: #fff;
+        }
+        .text{
+            width: 50%;
+            float: left;
+        }
+        .text h1{
+            font-size: 43px;
+            width: 640px;
+            position: relative;
+            margin-left: 40px;
+
+        }
+        .text p{
+            width: 650px;
+            font-size: 15px;
+            margin: 30px 0 30px 40px;
+            line-height: 25px;
+            color: #b2b1b1;
+        }
+        .picture{
+            width: 50%;
+            float: right;
+
+        }
+        .picture img{
+            width: 100%;
+            margin-top: -20px;
+            padding-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li class="logo"><img src="img/download-removebg-preview.png" alt=""></li>
+                    <li class="active"><a href="login.html">Home</a></li>
+                    <li><a href="input.html">Tambah</a></li>
+                    <li><a href="Table.html">Data</a></li>
+                    <li><a href="" class="btn"> <span>Sign Up</span></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="banner">
+            <div class="text">
+                <h1>MAPPA web</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+                    Harum sed assumenda expedita quisquam excepturi temporibus blanditiis odio,<br>
+                     ut voluptatibus vel!</p>
+                    <div class="ply-btn">
+                        <div class="inner">
+
+                        </div>
+                    </div>
+            </div>
+            <div class="picture">
+                <img src="img/Goodbye!.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
