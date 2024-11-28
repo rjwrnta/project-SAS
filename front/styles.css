@@ -198,35 +198,32 @@ nav .active {
   animation-delay: 0.3s;
   opacity: 0;
 }
-#about .left-grid p,
-#projects .left-grid p {
-  font-size: 18px;
-  line-height: 1.8;
-  color: rgb(233, 233, 233);
-  animation: bottomIn 1s ease-in-out forwards;
-  animation-delay: 0.4s;
-  opacity: 0;
+
+#projects .content h1 {
+  font-size: 4rem;
+  text-align:center;
+  font-weight: 800;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom:80px;
 }
-.action-btn {
-  font-size: 18px;
-  color: black;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  height: 45px;
-  width: 200px;
-  background-color: #00FF26;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: 0.3s;
-  margin-top: 40px;
-  animation: bottomIn 1s ease-in-out forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
+
+.table{
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 30px;
+  
 }
-.action-btn:hover {
-  background-color: #00d11f;
-}
+.table tr td,
+.table tr th{
+  color:#fff;
+  background: transparent;
+  text-align: center;
+  }
+
+
 
 /* Join-us */
 #join-us .content-wrap {

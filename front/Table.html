@@ -29,7 +29,6 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(transparent 60%, rgb(4, 61, 42) ) ;
         z-index: 1;
       }
       .section-box {
@@ -104,13 +103,25 @@
         background-color: #00FF26;
         box-shadow: 0 0 5px #00FF26;
       }
-      .table{
-        border-radius: 30px;
+      .hero-content h1 {
+        font-size: 4rem;
+        text-align: center;
+        font-weight: 800;
+        letter-spacing: 10px;
+        text-transform: uppercase;
+        margin-top: 20px;
+        color: #fff;
       }
+
+      .table tr td,
+      .table tr th{
+        color:#fff;
+        background: transparent !important;
+      }
+      
     </style>
 </head>
 <body>
-<<<<<<< HEAD
   
     <!-- Navbar Section Start-->
     <section id="hero">
@@ -127,12 +138,11 @@
               
             </nav>
           </header>
+          <!-- Content Start -->
           <div class="hero-content">
-            <h3>Manga</h3>
-            <h1>Animation</h1>
                 <h1>Table Manga</h1>
-                <table class="table " id="table">
-                    <thead class="table-light">
+                <table class="table" id="table">
+                    <thead style="background: rgba(255, 255, 255, 0.2);">
                         <tr>
                           <th scope="col">Id</th>
                           <th scope="col">Title</th>
@@ -145,7 +155,7 @@
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
-                      <tbody class="table-group-divider table-dark table-hover">
+                      <tbody class="table-group-divider bg-transparent">
                         <tr>
                           <th scope="row">1121</th>
                           <td></td>
@@ -182,96 +192,7 @@
                         </tr>
                       </tbody>
                   </table>
-=======
-    <div class="container">
-      <!-- Navbar Section Start-->
-      <section>
-        <nav class="navbar bg-body-tertiary mb-5">
-            <div class="container">
-              <a class="navbar-brand" href="#">
-               <img src="img/download-removebg-preview.png" alt="" width="100" height="25">
-              </a>
-              <ul class="nav justify-content-center">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="input.html">Tambah</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="Table.html">Table</a>
-                </li>
-               
-                <li class="nav-item">
-                   <button type="button" class="btn btn-success">Login</button>
-                   <button type="button" class="btn btn-success">Sign In</button>
-                </li>
-              </ul>
-            </div>
-          </nav>
-    </section>
-    <!-- Navbar Section End-->
-      <!-- Table Entitas & Atribute Start -->
-      <section>
-        <div class="card">
-          <div class="card-body">
-            <h1>Table Manga</h1>
-            <table class="table table-success table-hover" id="table">
-                <thead>
-                    <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Chapter</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Genre</th>
-                      <th scope="col">Durasi</th>
-                      <th scope="col">Chapter per Episode</th>
-                      <th scope="col">Sinopsis</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row"></th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row"></th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row"></th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-              </table>
->>>>>>> 9226f912f7158f1a05b65898086eed1ba2a957c3
-          </div>
-        </div>
-    </section>
-    <!-- Navbar Section End-->
+    <!-- conten Section End-->
     <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="./axios.js"></script>
     <script src="./submit.js"></script>
