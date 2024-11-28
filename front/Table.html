@@ -12,100 +12,178 @@
       body{
         font-family: "Poppins", serif;
         font-weight: 600;
+        background-color: black;
+      }
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+      }
+      #hero .section-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent 60%, rgb(4, 61, 42) ) ;
+        z-index: 1;
+      }
+      .section-box {
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+        border-radius: 30px;
+        height: 85vh;
+        width: 85%;
+        overflow: hidden;
+      }
+      .content-wrap {
+        padding: 20px 50px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header-logo {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .header-logo span {
+        color: #00FF26;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        z-index: 2;
+      }
+      .nav-items {
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        cursor: pointer;
+        transition: 0.3s;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        color:#fff;
+        
+      }
+      nav a{
+        color: #fff;
+        text-decoration: none;
+      }
+      nav .active {
+        color: #00FF26;
+      }
+      .nav-items::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        width: 100%;
+        height: 2px;
+        background-color: white;
+        box-shadow: 0 0 5px white;
+        transform: scale(0);
+        transform-origin: left;
+        transition: 0.3s;
+      }
+      .nav-items:hover::after {
+        transform: scale(1);
+      }
+      .active:hover::after {
+        background-color: #00FF26;
+        box-shadow: 0 0 5px #00FF26;
+      }
+      .table{
+        border-radius: 30px;
       }
     </style>
 </head>
 <body>
-    <div class="container">
-      <!-- Navbar Section Start-->
-      <section>
-        <nav class="navbar bg-body-tertiary mb-5">
-            <div class="container">
-              <a class="navbar-brand" href="#">
-               <img src="img/download-removebg-preview.png" alt="" width="100" height="25">
-              </a>
-              <ul class="nav justify-content-center">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="input.html">Tambah</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="Table.html">Table</a>
-                </li>
-               
-                <li class="nav-item">
-                   <button type="button" class="btn btn-success">Login</button>
-                   <button type="button" class="btn btn-success">Sign In</button>
-                </li>
-              </ul>
-            </div>
-          </nav>
-    </section>
-    <!-- Navbar Section End-->
-      <!-- Table Entitas & Atribute Start -->
-      <section>
-        <div class="card">
-          <div class="card-body">
-            <h1>Table Manga</h1>
-            <table class="table table-success table-hover" id="table">
-                <thead>
-                    <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Chapter</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Genre</th>
-                      <th scope="col">Durasi</th>
-                      <th scope="col">Chapter per Episode</th>
-                      <th scope="col">Sinopsis</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1121</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">1122</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1123</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-              </table>
+  
+    <!-- Navbar Section Start-->
+    <section id="hero">
+      <div class="section-box">
+        <div class="content-wrap">
+          <header>
+            <a class="header-logo"><span>MAPPA</span>Studios</a>
+            <nav>
+              <a href="index.html" class="nav-items active">Home</a>
+              <a href="input.html" class="nav-items">Tambah</a>
+              <a href="Table.html" class="nav-items">Table</a>
+              <a href="#" class="nav-items">Sign In</a>
+              <a href="#" class="nav-items">Sign Up</a>
+              
+            </nav>
+          </header>
+          <div class="hero-content">
+            <h3>Manga</h3>
+            <h1>Animation</h1>
+                <h1>Table Manga</h1>
+                <table class="table " id="table">
+                    <thead class="table-light">
+                        <tr>
+                          <th scope="col">Id</th>
+                          <th scope="col">Title</th>
+                          <th scope="col">Chapter</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Genre</th>
+                          <th scope="col">Durasi</th>
+                          <th scope="col">Chapter per Episode</th>
+                          <th scope="col">Sinopsis</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-group-divider table-dark table-hover">
+                        <tr>
+                          <th scope="row">1121</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+    
+                        </tr>
+                        <tr>
+                          <th scope="row">1122</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">1123</th>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                  </table>
           </div>
         </div>
-      </section>
-      <!-- Table Entitas & Atribute End -->
-
-    </div>
+    </section>
+    <!-- Navbar Section End-->
     <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
