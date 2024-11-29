@@ -20,12 +20,12 @@ section {
   width: 100%;
   height: 100vh;
 }
-/* section {
-  background-image: url(img/bg);
+section {
+  background-image: url(img/background.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-} */
+}
 #hero .section-box::before {
   content: '';
   position: absolute;
@@ -33,7 +33,7 @@ section {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(transparent 60%, rgb(4, 61, 42) ) ;
+   /* background: linear-gradient(transparent 60%, rgb(4, 61, 42) ) ; */
   z-index: 1;
 }
 .section-box {
@@ -60,6 +60,8 @@ header {
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
 }
 .header-logo span {
   color: #00FF26;
@@ -109,6 +111,30 @@ nav .active {
   background-color: #00FF26;
   box-shadow: 0 0 5px #00FF26;
 }
+.action-btn {
+  background-color: #00FF26;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  height: 45px;
+  width: 300px;
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 15px;
+  animation: bottomIn 1s ease-in-out forwards;
+  opacity: 0;
+  animation-delay: 0.7s;
+}
+.left-grid p{
+  animation: bottomIn 1s ease-in-out forwards;
+  animation-delay: 0.7s;
+}
+.action-btn:hover {
+  background-color: #00d11f;
+}
 
 .hero-content h3 {
   font-size: 2rem;
@@ -132,26 +158,6 @@ nav .active {
   width: 47%;
   margin-top: -150px;
   animation: planetAn 120s linear infinite;
-}
-.hero-btn {
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
-  border-radius: 50px;
-  height: 50px;
-  width: 250px;
-  margin-top: -150px;
-  z-index: 2;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.hero-btn:hover {
-  background-color: white;
-  color: black;
 }
 
 /* Section 2 */
@@ -233,7 +239,7 @@ nav .active {
   justify-content: center;
   height: 100%;
 }
-.join-form {
+.tambah-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -241,75 +247,7 @@ nav .active {
   margin-top: 30px;
   width: 100%;
 }
-.input-1 {
-  font-size: 18px;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  color: rgb(255, 255, 255);
-  background-color: transparent;
-  border: 1px solid white;
-  border-radius: 50px;
-  height: 45px;
-  width: 50%;
-  padding: 0 30px;
-}
-.input-1::placeholder {
-  color: white;
-}
-#join-us p {
-  font-size: 18px;
-  letter-spacing: 1px;
-  margin-top: 15px;
-  animation: bottomIn 1s ease-in-out forwards;
-  opacity: 0;
-  animation-delay: 0.6s;
-}
-.checkbox-wrap {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  font-size: 18px;
-  animation: bottomIn 1s ease-in-out forwards;
-  opacity: 0;
-  animation-delay: 0.65s;
-}
-.join-btn {
-  background-color: #00FF26;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  height: 45px;
-  width: 300px;
-  color: rgba(0, 0, 0, 0.8);
-  border-radius: 50px;
-  cursor: pointer;
-  transition: 0.3s;
-  margin-top: 15px;
-  animation: bottomIn 1s ease-in-out forwards;
-  opacity: 0;
-  animation-delay: 0.7s;
-}
-.join-btn:hover {
-  background-color: #00d11f;
-}
 
-.i1, .i2, .i3, .i4 {
-  animation: bottomIn 1s ease-in-out forwards;
-  opacity: 0;
-}
-.i1 {
-  animation-delay: 0.4s;
-}
-.i2 {
-  animation-delay: 0.45s;
-}
-.i3 {
-  animation-delay: 0.5s;
-}
-.i4 {
-  animation-delay: 0.55s;
-}
 
 /* Footer */
 .footer-grid {
