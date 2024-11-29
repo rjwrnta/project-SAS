@@ -17,7 +17,7 @@ const responseHandler = (request, h) => {
 
 const createMangaHandler = (request, h) => {
     const {
-        Title, Chapter, Status, Genre, ReleaseDate, MangaWriter
+        Title, Chapter, Status, Genre, Sinopsis, ReleaseDate, MangaWriter, ChapterPerEpisode, Duration
     } = request.payload;
     const id = nanoid(5);
     const createAt = new Date().toISOString;
@@ -28,8 +28,11 @@ const createMangaHandler = (request, h) => {
         Chapter,
         Status,
         Genre,
+        Sinopsis,
         ReleaseDate,
         MangaWriter,
+        ChapterPerEpisode,
+        Duration,
         createAt,
         updateAt,
     };
@@ -65,8 +68,11 @@ const showMangaHandler = () => ({
         Chapter: manga.Chapter,
         Status: manga.Status,
         Genre: manga.Genre,
+        Sinopsis: manga.Sinopsis,
         ReleaseDate: manga.ReleaseDate,
         MangaWriter: manga.MangaWriter,
+        ChapterPerEpisode: manga.ChapterPerEpisode,
+        Duration: manga.Duration,
       })),
     },
   });
@@ -94,7 +100,7 @@ const detailsMangaHandler = (request, h) => {
 
 const changeMangaHandler = (request, h) => {
     const {id} = request.params;
-    const {Title, Chapter, Status, Genre} = request.payload;
+    const {Title, Chapter, Status, Genre, Sinopsis, ReleaseDate, MangaWriter, ChapterPerEpisode, Duration} = request.payload;
     const updateAt = new Date().toISOString();
     const index = dataManga.findIndex((manga) => manga.id === id);
 
@@ -105,6 +111,11 @@ const changeMangaHandler = (request, h) => {
             Chapter,
             Status,
             Genre,
+            Sinopsis,
+            ReleaseDate,
+            MangaWriter,
+            ChapterPerEpisode,
+            Duration,
             updateAt,
         };
         const response = h.response({
