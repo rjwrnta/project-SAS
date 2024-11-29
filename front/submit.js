@@ -35,7 +35,7 @@ if (formTambahManga) {
             if(response.data.status === 'success'){
                 alert('Manga Berhasil Ditambahkan');
                  formTambahManga.reset();
-                 window.location.href = 'Table.html'
+                 window.location.href = 'index.html'
             } else{
                 alert('Manga Gagal Ditambahkan');
             }
@@ -51,25 +51,25 @@ const fetchManga = async () => {
     const response = await axios.get('http://localhost:3000/manga');
     const mangaData = response.data.data.dataManga;
 
-    const tableBody = document.getElementById('table');
+    const tableBody = document.getElementById('tabel');
     tableBody.innerHTML = '<tr><th scope="col">Id</th><th scope="col">Title</th><th scope="col">Chapter</th><th scope="col">Status</th><th scope="col">Release Date</th><th scope="col">Sinopsis</th><th scope="col">Manga Writer</th><th scope="col">Chapter Per Episode</th><th scope="col">Duration</th><th scope="col">Genre</th><th scope="col">Edit/Delete</th></tr>';
 
     mangaData.forEach((manga) => {
         tableBody.innerHTML += `<tr>
                       <th scope="row">${manga.id}</th>
                       <td>${manga.Title}</td>
-                      <td>${manga.Chapter}</td>
+                      <td>${manga.Chapter}Ch</td>
                       <td>${manga.Status}</td>
                       <td>${manga.ReleaseDate}</td>
                       <td>${manga.Sinopsis}</td>
                       <td>${manga.MangaWriter}</td>
-                      <td>${manga.ChapterPerEpisode}</td>
+                      <td>${manga.ChapterPerEpisode} Chapter</td>
                       <td>${manga.Duration}</td>
                       <td>${manga.Genre}</td>
                       <td><button type="submit" class="btn btn-outline-warning">Edit</button><button="submit" class="btn btn-outline-danger">Delete</button></td>
                     </tr>`;
     });
-    } catch (error){
+    } catch (error) {
         console.error('error fetch manga :', error);
     }
 };
