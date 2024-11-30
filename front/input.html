@@ -28,19 +28,24 @@
 
         .form-container h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: #f3f1f1;
             text-align: center;
         }
 
         .form-group {
             margin-bottom: 15px;
+            display: none; 
+        }
+
+        .form-group.active {
+            display: block;
         }
 
         .form-group label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
-            color: #f1eeee;
+            color: #fdfdfd;
         }
 
         .form-group input,
@@ -48,7 +53,7 @@
         .form-group select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #f3f1f1;
             border-radius: 5px;
             font-size: 14px;
             box-sizing: border-box;
@@ -60,88 +65,84 @@
         }
 
         .form-group select {
-            background-color: #fff;
+            background:transparent;
         }
 
-        .form-group button {
-            width: 100%;
+        .form-navigation button {
+            width: 100px;
             padding: 10px;
-            background-color: #007bff;
-            color: #fff;
+            background:transparent;
+            color: #f8f2f2;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            border: 1px solid #faf7f7;
         }
 
-        .form-group button:hover {
-            background-color: #0056b3;
+        .form-navigation button:hover {
+            background-color: #222;
         }
+
         .form-group .checkbox-group {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-      }
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-      input, select,textarea{
-          outline: none;
-          font-size: bold;
-          padding: 0 30px;
-          line-height: 30px;
-          border-radius: 10px;
-          border: 2px solid #f0ffff;
-          background: transparent;
-          color: #fff;
-          transition: 0.1s ease;
+        input, textarea{
+            outline: none;
+            font-size: bold;
+            padding: 0 30px;
+            line-height: 30px;
+            border-radius: 10px;
+            border: 2px solid #f0ffff;
+            background: transparent;
+            color: #fff;
+            transition: 0.1s ease;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h2>Form Data Manga</h2>
-        <form action="#" method="post">
-          <!-- Step 1 -->
-            <div class="form-group visible">
+        <form id="mangaForm">
+            <!-- Step 1 -->
+            <div class="form-group active">
                 <label for="title">Judul</label>
                 <input type="text" id="title" name="title" placeholder="Masukkan judul" required>
-              </div>
-              <div class="form-group visible">
+            </div>
+            <div class="form-group">
                 <label for="chapter">Chapter</label>
                 <input type="number" id="chapter" name="chapter" placeholder="Masukkan jumlah chapter" required>
-              </div>
-              <div class="form-group visible">
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select id="status" name="status" required>
-                        <option value="" disabled selected>Pilih status</option>
-                        <option value="ongoing">Ongoing</option>
-                        <option value="completed">Completed</option>
-                        <option value="hiatus">Hiatus</option>
-                    </select>
-                </div>
-                <div class="form-group visible">
-                <label for="rilis">Rilis</label>
-                <input type="date" id="rilis" name="rilis" placeholder="Masukkan jumlah chapter" required>
-              </div>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" name="status" required>
+                    <option value="" disabled selected>Pilih status</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="completed">Completed</option>
+                    <option value="hiatus">Hiatus</option>
+                </select>
+            </div>
 
-              <!-- Step 2 -->
-              <label for="synopsis">Sinopsis</label>
+            <!-- Step 2 -->
+            <div class="form-group">
+                <label for="synopsis">Sinopsis</label>
                 <textarea id="synopsis" name="synopsis" placeholder="Masukkan sinopsis"></textarea>
             </div>
             <div class="form-group">
                 <label for="writer">Writer</label>
-                <input type="text" id="writer" name="writer" placeholder="Masukkan jumlah writer" required>
-              </div>
-            <div class="form-group">
-                <label for="chapterPerEpisode">Chapter per Episode</label>
-                <input type="number" id="chapterPerEpisode" name="chapterPerEpisode" placeholder="Masukkan jumlah chapter per episode">
+                <input type="text" id="writer" name="writer" placeholder="Masukkan nama writer" required>
             </div>
 
-            <!-- step 3 -->
-            <div class="form-group">
-                <label for="durasi">Durasi</label>
-                <input type="number" id="durasi" name="durasi" placeholder="Masukkan jumlah durasi" required>
-              </div>
+            <!-- Step 3 -->
             <div class="form-group">
                 <label>Genre</label>
                 <div class="checkbox-group">
@@ -150,14 +151,45 @@
                     <label><input type="checkbox" name="genre" value="Comedy"> Comedy</label>
                     <label><input type="checkbox" name="genre" value="Drama"> Drama</label>
                     <label><input type="checkbox" name="genre" value="Fantasy"> Fantasy</label>
-                    <label><input type="checkbox" name="genre" value="Horror"> Horror</label>
-                    <label><input type="checkbox" name="genre" value="Romance"> Romance</label>
                 </div>
             </div>
-            <div class="form-group">
-                <button type="submit" href="index.html">Simpan Data</button>
+
+            <div class="form-navigation">
+                <button type="button" id="prevButton" disabled>Back</button>
+                <button type="button" id="nextButton">Next</button>
             </div>
         </form>
     </div>
+
+    <script>
+        const formGroups = document.querySelectorAll('.form-group');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        let currentStep = 0;
+
+        function updateForm() {
+            formGroups.forEach((group, index) => {
+                group.classList.toggle('active', index === currentStep);
+            });
+            prevButton.disabled = currentStep === 0;
+            nextButton.textContent = currentStep === formGroups.length - 1 ? 'Submit' : 'Next';
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentStep > 0) currentStep--;
+            updateForm();
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentStep < formGroups.length - 1) {
+                currentStep++;
+                updateForm();
+            } else {
+                document.getElementById('mangaForm').submit();
+            }
+        });
+
+        updateForm();
+    </script>
 </body>
 </html>
