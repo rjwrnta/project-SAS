@@ -3,134 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Form</title>
-    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Form Data Manga</title>
     <style>
-      body {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        color: #fff;
-        background: transparent ;
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(img/Aesthetic\ Fantasy\ Concept\ Art.jpg);
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.15); 
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f1eeee;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .form-group select {
+            background-color: #fff;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .form-group .checkbox-group {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
       }
-      html {
-        background-image: url(img/background.jpg);
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-      section{
-        color: #fff;
-        background: transparent !important;
-      }
+
+      input, select,textarea{
+          outline: none;
+          font-size: bold;
+          padding: 0 30px;
+          line-height: 30px;
+          border-radius: 10px;
+          border: 2px solid #f0ffff;
+          background: transparent;
+          color: #fff;
+          transition: 0.1s ease;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-       <!-- Navbar Section Start-->
-       <section>
-        <nav class="navbar bg-body-tertiary mb-5">
-            <div class="container">
-              <a class="navbar-brand" href="#">
-               <img src="img/download-removebg-preview.png" alt="" width="100" height="25">
-              </a>
-              <ul class="nav justify-content-center">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="input.html">Tambah</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="Table.html">Table</a>
-                </li>
-               
-                <li class="nav-item">
-                   <button type="button" class="btn btn-success">Login</button>
-                   <button type="button" class="btn btn-success">Sign In</button>
-                </li>
-              </ul>
+    <div class="form-container">
+        <h2>Form Data Manga</h2>
+        <form action="#" method="post">
+          <!-- Step 1 -->
+            <div class="form-group visible">
+                <label for="title">Judul</label>
+                <input type="text" id="title" name="title" placeholder="Masukkan judul" required>
+              </div>
+              <div class="form-group visible">
+                <label for="chapter">Chapter</label>
+                <input type="number" id="chapter" name="chapter" placeholder="Masukkan jumlah chapter" required>
+              </div>
+              <div class="form-group visible">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="" disabled selected>Pilih status</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                        <option value="hiatus">Hiatus</option>
+                    </select>
+                </div>
+                <div class="form-group visible">
+                <label for="rilis">Rilis</label>
+                <input type="date" id="rilis" name="rilis" placeholder="Masukkan jumlah chapter" required>
+              </div>
+
+              <!-- Step 2 -->
+              <label for="synopsis">Sinopsis</label>
+                <textarea id="synopsis" name="synopsis" placeholder="Masukkan sinopsis"></textarea>
             </div>
-          </nav>
-       </section>
-    <!-- Navbar Section End-->
-     <!-- Input Sction Start -->
-     <section>
-       <div class="card col-9 mx-auto justify-content-center">
-         <div class="card-body">
-          <form  id="formTambahManga">
-            <div class="row-cols-auto" id="step1">
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingTitle" placeholder="Jujusu Kaisen Movie 0">
-                  <label for="floatingPassword">Title</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="number" class="form-control" id="floatingChapter" placeholder="Chapter 1">
-                  <label for="floatingPassword">Chapter</label>
-                </div>
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingStatus" aria-label="Floating label select example">
-                      <option selected>Status</option>
-                      <option value="On-Going">On-Going</option>
-                      <option value="Complete">Complete</option>
-                      <option value="Hiatus">Hiatus</option>
-                    </select>
-                    <label for="floatingSelect">Choose</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="floatingReleaseDate" placeholder="Date">
-                    <label for="floatingDate">Release Date</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Sinopsis Here" id="floatingSinopsis" style="height: 70px"></textarea>
-                    <label for="floatingTextarea2">Sinopsis</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingMangaWriter" placeholder="Writer">
-                    <label for="floatingWriter">Manga Writer</label>
-                  </div>
+            <div class="form-group">
+                <label for="writer">Writer</label>
+                <input type="text" id="writer" name="writer" placeholder="Masukkan jumlah writer" required>
               </div>
-  
-                <div class="row-cols-auto" id="step2">
-                  <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="floatingChapter-eps" placeholder="Chapter eps">
-                    <label for="floatingEpisode">Chapter per Episode</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="time" class="form-control" id="floatingDuration" placeholder="Duration">
-                    <label for="floatingDuration">Duration</label>
-                  </div>
-                </div>
-  
-                <div class="row-cols-auto mt-1">
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingGenre" aria-label="Floating label select example">
-                      <option selected>Genre</option>
-                      <option value="Genre">Comedy</option>
-                      <option value="Horor">Horor</option>
-                      <option value="Action">Action</option>
-                      <option value="Sci-Fi">Sci-Fi</option>
-                      <option value="Romance">Romance</option>
-                      <option value="Slice of Life">Slice of Life</option>
-                      <option value="Mystery">Mystery</option>
-                      <option value="Harem">Harem</option>
-                      <option value="Ecchi">Ecchi</option>
-                      <option value="Shounen">Shounen</option>
-                      <option value="Adventure">Adventure</option>
-                      <option value="Isekai">Isekai</option>
-                    </select>
-                    <label for="floatingSelect">Choose</label>
-                  </div>
-                  <button type="submit" class="btn btn-outline-success">Submit</button>
-          </form>
+            <div class="form-group">
+                <label for="chapterPerEpisode">Chapter per Episode</label>
+                <input type="number" id="chapterPerEpisode" name="chapterPerEpisode" placeholder="Masukkan jumlah chapter per episode">
+            </div>
+
+            <!-- step 3 -->
+            <div class="form-group">
+                <label for="durasi">Durasi</label>
+                <input type="number" id="durasi" name="durasi" placeholder="Masukkan jumlah durasi" required>
               </div>
-          </div>
-         </div>
-       </div>
-     </div>
-     </section>
-     <!-- Input Section End-->
-    
+            <div class="form-group">
+                <label>Genre</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="genre" value="Action"> Action</label>
+                    <label><input type="checkbox" name="genre" value="Adventure"> Adventure</label>
+                    <label><input type="checkbox" name="genre" value="Comedy"> Comedy</label>
+                    <label><input type="checkbox" name="genre" value="Drama"> Drama</label>
+                    <label><input type="checkbox" name="genre" value="Fantasy"> Fantasy</label>
+                    <label><input type="checkbox" name="genre" value="Horror"> Horror</label>
+                    <label><input type="checkbox" name="genre" value="Romance"> Romance</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" href="index.html">Simpan Data</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
