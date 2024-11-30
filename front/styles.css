@@ -326,3 +326,93 @@ nav .active {
 .f6 {
   animation-delay: 0.5s;
 }
+
+/* inputan */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.15); 
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 400px;
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  color: #f3f1f1;
+  text-align: center;
+}
+.form-group {
+  margin-bottom: 15px;
+  display: none; 
+}
+
+.form-group.active {
+  display: block;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fdfdfd;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #f3f1f1;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  resize: none;
+  height: 100px;
+}
+
+.form-group select {
+  background:transparent;
+}
+
+.form-navigation button {
+  width: 100px;
+  padding: 10px;
+  background:transparent;
+  color: #f8f2f2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border: 1px solid #faf7f7;
+}
+
+.form-navigation button:hover {
+  background-color: #222;
+}
+
+.form-group .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+input, textarea{
+  outline: none;
+  font-size: bold;
+  padding: 0 30px;
+  line-height: 30px;
+  border-radius: 10px;
+  border: 2px solid #f0ffff;
+  background: transparent;
+  color: #fff;
+  transition: 0.1s ease;
+}
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
