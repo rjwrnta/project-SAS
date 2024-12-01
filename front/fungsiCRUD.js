@@ -1,48 +1,85 @@
-const addManga = async () => {
-    const formAdd = document.getElementById('formTambahManga');
-    formAdd.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('form submitted');
+console.log('fungsiCRUD.js terpanggil')
 
-        const Title = document.getElementById('floatingTitle').value;
-        const Chapter = document.getElementById('floatingChapter').value;
-        const Status = document.getElementById('floatingStatus').value;
-        const ReleaseDate = document.getElementById('floatingReleaseDate').value;
-        const Sinopsis = document.getElementById('floatingSinopsis').value;
-        const MangaWriter = document.getElementById('floatingMangaWriter').value;
-        const ChapterPerEpisode = document.getElementById('floatingChapter-eps').value;
-        const Duration = document.getElementById('floatingDuration').value;
-        const Genre = document.getElementById('floatingGenre').value;
-
-        try {
-            const response = await axios.post('http://localhost:3000/manga/create', {
-                Title,
-                Chapter,
-                Status,
-                ReleaseDate,
-                Sinopsis,
-                MangaWriter,
-                ChapterPerEpisode,
-                Duration,
-                Genre,
-            })
-            console.log(response);
-
-            if(response.data.status === 'success'){
-                alert('Manga Berhasil Ditambahkan');
-                formAdd.reset();
-                window.location.href = 'index.html'
-            } else {
-                alert('Manga Gagal Ditambahkan');
-            }
-        } catch (error) {
-            console.error('error add manga :', error);
-            alert('Terjadi Kesalahan Saat Menambahkan Manga');
+document.addEventListener('DOMContentLoaded', () => {
+    const formGroups = document.querySelectorAll('.form-group');
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    let currentStep = 0;
+    
+    function updateForm() {
+        formGroups.forEach((group, index) => {
+            group.classList.toggle('active', index === currentStep);
+        });
+        prevButton.disabled = currentStep === 0;
+        nextButton.textContent = currentStep === formGroups.length - 1 ? 'Submit' : 'Next';
+    }
+    
+    prevButton.addEventListener('click', () => {
+        if (currentStep > 0) currentStep--;
+        updateForm();
+    });
+    
+    nextButton.addEventListener('click', async () => {
+        if (currentStep < formGroups.length - 1) {
+            currentStep++;
+            updateForm();
+        } else {
+            await addManga();
+            console.log('test')
         }
     });
-};
+    
+    const formManga = document.getElementById('mangaForm');
+    formManga.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await addManga();
+    })
+    
+    const addManga = async () => {
+        console.log('fungsi addManga terpanggil')
+            const Title = document.getElementById('title').value;
+            const Chapter = document.getElementById('chapter').value;
+            const Status = document.getElementById('status').value;
+            const ReleaseDate = document.getElementById('Rilis').value;
+            const Sinopsis = document.getElementById('synopsis').value;
+            const MangaWriter = document.getElementById('writer').value;
+            const ChapterPerEpisode = document.getElementById('chapter-Eps').value;
+            const Duration = document.getElementById('duration').value;
+            const selectGenre = [];
+            document.querySelectorAll('input[name="Genre"]:checked').forEach((checkbox) => {
+                selectGenre.push(checkbox.value);
+            });
+    
+            try {
+                const response = await axios.post('http://localhost:3000/manga/create', {
+                    Title,
+                    Chapter,
+                    Status,
+                    ReleaseDate,
+                    Sinopsis,
+                    MangaWriter,
+                    ChapterPerEpisode,
+                    Duration,
+                    Genre: selectGenre.join(', ')
+                });
+    
+                if(response.data.status === 'success'){
+                    alert('Manga berhasil Ditambahkan');
+                    formManga.reset();
+                    window.location.href = 'index.html'
+                } else {
+                    alert('Manga Gagal Ditambahkan');
+                }
+            } catch (error) {
+                console.error('error add manga:', error);
+                alert('Terjadi Kesalahan Saat Menambahkan Manga')
+            }
+    }
+    
+})
 
 const fetchManga = async () => {
+    console.log('fungsi fetchManga terpanggil')
     try {
         const response = await axios.get('http://localhost:3000/manga');
         const mangaData = response.data.data.dataManga;
@@ -89,6 +126,7 @@ const addEventListener = () => {
 }
 
 const deleteManga = async (id) => {
+    console.log('fungsi deleteManga terpanggil')
     try {
         const response = await axios.delete(`http://localhost:3000/manga/${id}`);
         if(response.data.status === 'success'){
