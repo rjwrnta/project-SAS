@@ -22,12 +22,15 @@ const createMangaHandler = (request, h) => {
     const id = nanoid(5);
     const createAt = new Date().toISOString;
     const updateAt = createAt;
+    const genreArray = Array.isArray(Genre)
+        ? Genre
+        : Genre.split(',').map((g) => g.trim());
     const newManga = {
         id,
         Title,
         Chapter,
         Status,
-        Genre,
+        Genre: genreArray,
         Sinopsis,
         ReleaseDate,
         MangaWriter,
@@ -67,7 +70,7 @@ const showMangaHandler = () => ({
         Title: manga.Title,
         Chapter: manga.Chapter,
         Status: manga.Status,
-        Genre: manga.Genre,
+        Genre: Array.isArray(manga.Genre) ? manga.Genre : [manga.Genre],
         Sinopsis: manga.Sinopsis,
         ReleaseDate: manga.ReleaseDate,
         MangaWriter: manga.MangaWriter,

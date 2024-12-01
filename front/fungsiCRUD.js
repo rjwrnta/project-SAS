@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const ChapterPerEpisode = document.getElementById('chapter-Eps').value;
             const Duration = document.getElementById('duration').value;
             const selectGenre = [];
-            document.querySelectorAll('input[name="Genre"]:checked').forEach((checkbox) => {
+            document.querySelectorAll('input[name="genre"]:checked').forEach((checkbox) => {
                 selectGenre.push(checkbox.value);
             });
     
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     MangaWriter,
                     ChapterPerEpisode,
                     Duration,
-                    Genre: selectGenre.join(', ')
+                    Genre: selectGenre,
                 });
     
                 if(response.data.status === 'success'){
@@ -98,7 +98,7 @@ const fetchManga = async () => {
                        <td>${manga.MangaWriter}</td>
                        <td>${manga.ChapterPerEpisode} Chapter</td>
                        <td>${manga.Duration}</td>
-                       <td>${manga.Genre}</td>
+                       <td>${manga.Genre.join(', ')}</td>
                        <td>
                          <button type="button" class="btn btn-outline-warning btn-edit" data-id="${manga.id}">Edit</button>
                          <button type="button" class="btn btn-outline-danger btn-delete" data-id="${manga.id}">Delete</button>
