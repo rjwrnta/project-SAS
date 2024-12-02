@@ -123,6 +123,13 @@ const addEventListener = () => {
             }
         })
     })
+
+    document.querySelectorAll('.btn-edit').forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const id =  e.target.dataset.id
+            changeManga(id)
+        })
+    })
 }
 
 const deleteManga = async (id) => {
@@ -138,5 +145,65 @@ const deleteManga = async (id) => {
     } catch (error) {
         console.error('error delete manga:', error);
         alert('Terjadi Kesalahan Saat Menghapus Manga');
+    }
+}
+
+const changeManga = async (id) => {
+    console.log('fungsi changeManga terpanggil')
+    if(!id){
+        console.error('ID tidak ditemukan')
+    } else {
+        console.log('ID adalah: ', id)
+    }
+    try {
+        const response = await axios.get(`http://localhost:3000/manga/${id}`);
+        console.log('data diterima: ', response.data)
+        const manga = response.data.data;
+
+        document.getElementById('title').value = manga.Title;
+        document.getElementById('chapter').value = manga.Chapter;
+        document.getElementById('status').value = manga.Status;
+        document.getElementById('Rilis').value = manga.ReleaseDate;
+        document.getElementById('synopsis').value = manga.Sinopsis;
+        document.getElementById('writer').value = manga.MangaWriter;
+        document.getElementById('chapter-Eps').value = manga.ChapterPerEpisode;
+        document.getElementById('duration').value = manga.Duration;
+        const genreCheckbox = document.querySelectorAll('input[name="genre"]')
+        genreCheckbox.forEach((checkbox) => {
+            checkbox.checked = manga.genre.split(', ').include(checkbox.value);
+        })
+
+        const nextButton = document.getElementById('nextButton');
+        nextButton.textContent = 'Update';
+        nextButton.onclick = async () => {
+            try {
+                const updateManga = {
+                    Title: document.getElementById('title').value,
+                    Chapter: document.getElementById('chapter').value,
+                    Status: document.getElementById('status').value,
+                    ReleaseDate: document.getElementById('Rilis').value,
+                    Sinopsis: document.getElementById('synopsis').value,
+                    MangaWriter: document.getElementById('writer').value,
+                    ChapterPerEpisode: document.getElementById('chapter-Eps').value,
+                    Duration: document.getElementById('duration').value,
+                    Genre: Array.from(document.querySelectorAll('input[name="Genre"]:checked')).map(el => el.value).join(', ')
+                };
+
+                const updateResponse = await axios.put(`http://localhost:3000/manga/${id}`, updateManga)
+                if(updateResponse.data.status === 'success'){
+                    alert('Manga Berhasil Diubah')
+                    formManga.reset()
+                    window.location.href = 'index.html'
+                } else {
+                    alert('Manga Gagal Diubah')
+                }
+            } catch (error){
+                console.error('error change manga :', error)
+                alert('Terjadi Kesalahan Saat Mengubah Manga')
+            }
+        }
+    } catch (error){
+         console.error('error fetch manga by ID :', error)
+         alert('Terjadi Kesalahan Saat Mengambil Data Manga')
     }
 }
