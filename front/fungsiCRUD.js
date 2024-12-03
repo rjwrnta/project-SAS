@@ -1,11 +1,25 @@
 console.log('fungsiCRUD.js terpanggil')
+const formManga = document.getElementById('mangaForm');
+
+
+function getQueryParam(param) {
+    const urlParam = new URLSearchParams(window.location.search)
+    const id = urlParam.get(param)
+    if (!id) {
+        console.log('ID tidak ditemukan di URL')
+        // alert('ID tidak valid')
+        return null
+    }
+
+    return id
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const formGroups = document.querySelectorAll('.form-group');
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
     let currentStep = 0;
-    
+
     function updateForm() {
         formGroups.forEach((group, index) => {
             group.classList.toggle('active', index === currentStep);
@@ -13,69 +27,70 @@ document.addEventListener('DOMContentLoaded', () => {
         prevButton.disabled = currentStep === 0;
         nextButton.textContent = currentStep === formGroups.length - 1 ? 'Submit' : 'Next';
     }
-    
-    prevButton.addEventListener('click', () => {
-        if (currentStep > 0) currentStep--;
-        updateForm();
-    });
-    
+
+    // prevButton.addEventListener('click', () => {
+    //     if (currentStep > 0) currentStep--;
+    //     updateForm();
+    // });
+
     nextButton.addEventListener('click', async () => {
         if (currentStep < formGroups.length - 1) {
             currentStep++;
             updateForm();
         } else {
-            await addManga();
-            console.log('test')
+            const mangaId = getQueryParam('id')
+            // ketika tersedia mangaID maka update
+            if (mangaId) {
+                console.log('EDITING')
+                await updateManga(mangaId)
+            } else {
+                console.log('Add New')
+                await addManga()
+            }
         }
     });
-    
-    const formManga = document.getElementById('mangaForm');
-    formManga.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await addManga();
-    })
-    
+
     const addManga = async () => {
         console.log('fungsi addManga terpanggil')
-            const Title = document.getElementById('title').value;
-            const Chapter = document.getElementById('chapter').value;
-            const Status = document.getElementById('status').value;
-            const ReleaseDate = document.getElementById('Rilis').value;
-            const Sinopsis = document.getElementById('synopsis').value;
-            const MangaWriter = document.getElementById('writer').value;
-            const ChapterPerEpisode = document.getElementById('chapter-Eps').value;
-            const Duration = document.getElementById('duration').value;
-            const selectGenre = [];
-            document.querySelectorAll('input[name="genre"]:checked').forEach((checkbox) => {
-                selectGenre.push(checkbox.value);
+        const Title = document.getElementById('title').value;
+        const Chapter = document.getElementById('chapter').value;
+        const Status = document.getElementById('status').value;
+        const ReleaseDate = document.getElementById('Rilis').value;
+        const Sinopsis = document.getElementById('synopsis').value;
+        const MangaWriter = document.getElementById('writer').value;
+        const ChapterPerEpisode = document.getElementById('chapter-Eps').value;
+        const Duration = document.getElementById('duration').value;
+        const selectGenre = [];
+        document.querySelectorAll('input[name="genre"]:checked').forEach((checkbox) => {
+            selectGenre.push(checkbox.value);
+        });
+
+        try {
+            const response = await axios.post('http://localhost:3000/manga/create', {
+                Title,
+                Chapter,
+                Status,
+                ReleaseDate,
+                Sinopsis,
+                MangaWriter,
+                ChapterPerEpisode,
+                Duration,
+                Genre: selectGenre,
             });
-    
-            try {
-                const response = await axios.post('http://localhost:3000/manga/create', {
-                    Title,
-                    Chapter,
-                    Status,
-                    ReleaseDate,
-                    Sinopsis,
-                    MangaWriter,
-                    ChapterPerEpisode,
-                    Duration,
-                    Genre: selectGenre,
-                });
-    
-                if(response.data.status === 'success'){
-                    alert('Manga berhasil Ditambahkan');
-                    formManga.reset();
-                    window.location.href = 'index.html'
-                } else {
-                    alert('Manga Gagal Ditambahkan');
-                }
-            } catch (error) {
-                console.error('error add manga:', error);
-                alert('Terjadi Kesalahan Saat Menambahkan Manga')
+
+            if (response.data.status === 'success') {
+                // alert('Manga berhasil Ditambahkan');
+                formManga.reset();
+                window.location.href = 'index.html'
+            } else {
+                alert('Manga Gagal Ditambahkan');
             }
+        } catch (error) {
+            console.error('error add manga:', error);
+            alert('Terjadi Kesalahan Saat Menambahkan Manga')
+        }
     }
-    
+
 })
 
 const fetchManga = async () => {
@@ -98,7 +113,7 @@ const fetchManga = async () => {
                        <td>${manga.MangaWriter}</td>
                        <td>${manga.ChapterPerEpisode} Chapter</td>
                        <td>${manga.Duration}</td>
-                       <td>${manga.Genre.join(', ')}</td>
+                       <td>${Array.isArray(manga.Genre) ? manga.Genre.join(', ') : manga.Genre.split(', ').join(', ')}</td>
                        <td>
                          <button type="button" class="btn btn-outline-warning btn-edit" data-id="${manga.id}">Edit</button>
                          <button type="button" class="btn btn-outline-danger btn-delete" data-id="${manga.id}">Delete</button>
@@ -118,7 +133,7 @@ const addEventListener = () => {
         button.addEventListener('click', (e) => {
             const id = e.target.dataset.id;
             const confirmDelete = confirm('Yakin Ingin Menghapus Manga Ini?')
-            if(confirmDelete){
+            if (confirmDelete) {
                 deleteManga(id)
             }
         })
@@ -126,8 +141,9 @@ const addEventListener = () => {
 
     document.querySelectorAll('.btn-edit').forEach((button) => {
         button.addEventListener('click', (e) => {
-            const id =  e.target.dataset.id
-            changeManga(id)
+            const id = e.target.dataset.id
+            console.log(id)
+            window.location.href = `input.html?id=${id}`
         })
     })
 }
@@ -136,8 +152,8 @@ const deleteManga = async (id) => {
     console.log('fungsi deleteManga terpanggil')
     try {
         const response = await axios.delete(`http://localhost:3000/manga/${id}`);
-        if(response.data.status === 'success'){
-            alert('Manga Berhasil Dihapus');
+        if (response.data.status === 'success') {
+            // alert('Manga Berhasil Dihapus');
             fetchManga();
         } else {
             alert('Manga Gagal Dihapus')
@@ -148,9 +164,10 @@ const deleteManga = async (id) => {
     }
 }
 
+
 const changeManga = async (id) => {
     console.log('fungsi changeManga terpanggil')
-    if(!id){
+    if (!id) {
         console.error('ID tidak ditemukan')
     } else {
         console.log('ID adalah: ', id)
@@ -158,7 +175,8 @@ const changeManga = async (id) => {
     try {
         const response = await axios.get(`http://localhost:3000/manga/${id}`);
         console.log('data diterima: ', response.data)
-        const manga = response.data.data;
+        const manga = response.data.data.manga;
+        console.log('data manga: ', manga)
 
         document.getElementById('title').value = manga.Title;
         document.getElementById('chapter').value = manga.Chapter;
@@ -170,40 +188,42 @@ const changeManga = async (id) => {
         document.getElementById('duration').value = manga.Duration;
         const genreCheckbox = document.querySelectorAll('input[name="genre"]')
         genreCheckbox.forEach((checkbox) => {
-            checkbox.checked = manga.genre.split(', ').include(checkbox.value);
+            checkbox.checked = manga.Genre.includes(checkbox.value);
         })
-
-        const nextButton = document.getElementById('nextButton');
-        nextButton.textContent = 'Update';
-        nextButton.onclick = async () => {
-            try {
-                const updateManga = {
-                    Title: document.getElementById('title').value,
-                    Chapter: document.getElementById('chapter').value,
-                    Status: document.getElementById('status').value,
-                    ReleaseDate: document.getElementById('Rilis').value,
-                    Sinopsis: document.getElementById('synopsis').value,
-                    MangaWriter: document.getElementById('writer').value,
-                    ChapterPerEpisode: document.getElementById('chapter-Eps').value,
-                    Duration: document.getElementById('duration').value,
-                    Genre: Array.from(document.querySelectorAll('input[name="Genre"]:checked')).map(el => el.value).join(', ')
-                };
-
-                const updateResponse = await axios.put(`http://localhost:3000/manga/${id}`, updateManga)
-                if(updateResponse.data.status === 'success'){
-                    alert('Manga Berhasil Diubah')
-                    formManga.reset()
-                    window.location.href = 'index.html'
-                } else {
-                    alert('Manga Gagal Diubah')
-                }
-            } catch (error){
-                console.error('error change manga :', error)
-                alert('Terjadi Kesalahan Saat Mengubah Manga')
-            }
+    } catch (error) {
+        console.error('error fetch manga by ID :', error)
+        if (error.response && error.response.status === 404) {
+            alert('manga dengan ID tersebut tidak ditemukan')
         }
-    } catch (error){
-         console.error('error fetch manga by ID :', error)
-         alert('Terjadi Kesalahan Saat Mengambil Data Manga')
+        alert('Terjadi Kesalahan Saat Mengambil Data Manga')
+    }
+}
+
+const updateManga = async (id) => {
+    try {
+        const updateManga = {
+            Title: document.getElementById('title').value,
+            Chapter: document.getElementById('chapter').value,
+            Status: document.getElementById('status').value,
+            ReleaseDate: document.getElementById('Rilis').value,
+            Sinopsis: document.getElementById('synopsis').value,
+            MangaWriter: document.getElementById('writer').value,
+            ChapterPerEpisode: document.getElementById('chapter-Eps').value,
+            Duration: document.getElementById('duration').value,
+            Genre: Array.from(document.querySelectorAll('input[name="genre"]:checked')).map(el => el.value)
+        };
+
+        const updateResponse = await axios.put(`http://localhost:3000/manga/${id}`, updateManga)
+        if (updateResponse.data.status === 'success') {
+            console.log(updateManga)
+            // alert('Manga Berhasil Diubah')
+            formManga.reset()
+            window.location.href = 'index.html'
+        } else {
+            alert('Manga Gagal Diubah')
+        }
+    } catch (error) {
+        console.error('error change manga :', error)
+        alert('Terjadi Kesalahan Saat Mengubah Manga')
     }
 }

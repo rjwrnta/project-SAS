@@ -119,6 +119,7 @@
                 <label for="title">Judul</label>
                 <input type="text" id="title" name="title" placeholder="Masukkan judul" required>
             </div>
+            
             <div class="form-group">
                 <label for="chapter">Chapter</label>
                 <input type="number" id="chapter" name="chapter" placeholder="Masukkan jumlah chapter" required>
@@ -178,5 +179,16 @@
 
     <script src="./axios.js"></script>
     <script src="./fungsiCRUD.js"></script>
+
+    <script>
+       window.onload = () => {
+        const mangaID = getQueryParam('id')
+        console.log(mangaID)
+        if(mangaID){
+            changeManga(mangaID)
+            // add event listener ke form submit untuk update
+        }
+       }
+    </script>
 </body>
 </html>
