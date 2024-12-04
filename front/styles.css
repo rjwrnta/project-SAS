@@ -283,7 +283,7 @@ nav .active {
   font-size: 17px;
   font-weight: 400;
 }
-.main .row .price{
+.main .row .now{
   font-size: 22px;
   font-weight: 600;
   color:#0b60b0;
@@ -316,7 +316,7 @@ button:first-child:hover{
 .button button:last-child{
   background: #164b60;
   color: #f3f8f8;
-  margin-left: 10px;
+  margin-left: 5px;
 
 }
 button:last-child:hover{
