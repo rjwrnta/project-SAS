@@ -8,7 +8,7 @@
       @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
-            background-image: url(img/Aesthetic\ Fantasy\ Concept\ Art.jpg);
+            background-image: url(img/sunset-7790620.jpg);
             background-size: cover;
             background-position: center;
             margin: 0;
@@ -114,15 +114,26 @@
     <div class="form-container">
         <h2>Form Data Manga</h2>
         <form id="mangaForm">
-            <!-- Step 1 -->
+            <!-- Step 1 (Harusnya)-->
             <div class="form-group active">
                 <label for="title">Judul</label>
                 <input type="text" id="title" name="title" placeholder="Masukkan judul" required>
             </div>
+
+            <div class="form-group">
+                <label for="synopsis">Sinopsis</label>
+                <textarea id="synopsis" name="synopsis" placeholder="Masukkan sinopsis"></textarea>
+            </div>
+
             <div class="form-group">
                 <label for="chapter">Chapter</label>
                 <input type="number" id="chapter" name="chapter" placeholder="Masukkan jumlah chapter" required>
             </div>
+            <div class="form-group">
+                <label for="Rilis">Rilis</label>
+                <input type="number" id="Rilis" name="Rilis" placeholder="Masukkan tgl" required>
+            </div>
+
             <div class="form-group">
                 <label for="status">Status</label>
                 <select id="status" name="status" required>
@@ -133,17 +144,23 @@
                 </select>
             </div>
 
-            <!-- Step 2 -->
-            <div class="form-group">
-                <label for="synopsis">Sinopsis</label>
-                <textarea id="synopsis" name="synopsis" placeholder="Masukkan sinopsis"></textarea>
-            </div>
             <div class="form-group">
                 <label for="writer">Writer</label>
                 <input type="text" id="writer" name="writer" placeholder="Masukkan nama writer" required>
             </div>
 
-            <!-- Step 3 -->
+
+            <!-- Step 2 (Harusnya)-->
+            <div class="form-group">
+                <label for="duration">duration</label>
+                <input type="text" id="duration" name="duration" placeholder="Masukkan nama duration" required>
+            </div>
+            <div class="form-group">
+                <label for="chapter-Eps">Chapter per eps</label>
+                <input type="text" id="chapter-Eps" name="chapter-Eps" placeholder="Masukkan nama chapter-Eps" required>
+            </div>
+             
+            <!-- Step 3 (Harusnya) -->
             <div class="form-group">
                 <label>Genre</label>
                 <div class="checkbox-group">
@@ -156,82 +173,6 @@
                     <label><input type="checkbox" name="genre" value="Sci-Fi"> Sci-Fi</label>
                     <label><input type="checkbox" name="genre" value="Isekai"> Isekai</label>
                 </div>
-<<<<<<< HEAD
-=======
-                <div class="form-floating mb-3">
-                  <input type="number" class="form-control" id="floatingChapter" placeholder="Chapter 1">
-                  <label for="floatingPassword">Chapter</label>
-                </div>
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingStatus" aria-label="Floating label select example">
-                      <option selected>Status</option>
-                      <option value="On-Going">On-Going</option>
-                      <option value="Complete">Complete</option>
-                      <option value="Hiatus">Hiatus</option>
-                    </select>
-                    <label for="floatingSelect">Choose</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="floatingReleaseDate" placeholder="Date">
-                    <label for="floatingDate">Release Date</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Sinopsis Here" id="floatingSinopsis" style="height: 70px"></textarea>
-                    <label for="floatingTextarea2">Sinopsis</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingMangaWriter" placeholder="Writer">
-                    <label for="floatingWriter">Manga Writer</label>
-                  </div>
-              </div>
-  
-                <div class="row-cols-auto" id="step2">
-                  <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="floatingChapter-eps" placeholder="Chapter eps">
-                    <label for="floatingEpisode">Chapter per Episode</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="time" class="form-control" id="floatingDuration" placeholder="Duration">
-                    <label for="floatingDuration">Duration</label>
-                  </div>
-                </div>
-  
-                <div class="row-cols-auto mt-1">
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingGenre" aria-label="Floating label select example">
-                      <option selected>Genre</option>
-                      <option value="Genre">Comedy</option>
-                      <option value="Horor">Horor</option>
-                      <option value="Action">Action</option>
-                      <option value="Sci-Fi">Sci-Fi</option>
-                      <option value="Romance">Romance</option>
-                      <option value="Slice of Life">Slice of Life</option>
-                      <option value="Mystery">Mystery</option>
-                      <option value="Harem">Harem</option>
-                      <option value="Ecchi">Ecchi</option>
-                      <option value="Shounen">Shounen</option>
-                      <option value="Adventure">Adventure</option>
-                      <option value="Isekai">Isekai</option>
-                    </select>
-                    <label for="floatingSelect">Choose</label>
-                  </div>
-                  <button type="submit" class="btn btn-outline-success">Submit</button>
-          </form>
-              </div>
-          </div>
-         </div>
-       </div>
-     </div>
-     </section>
-     <!-- Input Section End-->
-    
-     <script src="./axios.js"></script>
-    <script src="./fungsiCRUD.js"></script>
-
-    <script>
-      addManga()
-    </script>
->>>>>>> 8b6aabc7d369f85b8be94ac8db7697186271799c
             </div>
 
             <div class="form-navigation">
