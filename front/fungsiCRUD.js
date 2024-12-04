@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await axios.post('http://localhost:3000/manga/create', {
                 Title,
                 Chapter,
+                Tarif: parseInt(Chapter) * 10000,
                 Status,
                 ReleaseDate,
                 Sinopsis,
@@ -104,13 +105,14 @@ const fetchManga = async () => {
         const mangaData = response.data.data.dataManga;
 
         const table = document.getElementById('tabel');
-        table.innerHTML = '<tr><th scope="col">Id</th><th scope="col">Title</th><th scope="col">Chapter</th><th scope="col">Status</th><th scope="col">Release Date</th><th scope="col">Sinopsis</th><th scope="col">Manga Writer</th><th scope="col">Chapter Per Episode</th><th scope="col">Duration</th><th scope="col">Genre</th><th scope="col">Edit/Delete</th></tr>';
+        table.innerHTML = '<tr><th scope="col">Id</th><th scope="col">Title</th><th scope="col">Chapter</th><th scope="col">Tarif</th><th scope="col">Status</th><th scope="col">Release Date</th><th scope="col">Sinopsis</th><th scope="col">Manga Writer</th><th scope="col">Chapter Per Episode</th><th scope="col">Duration</th><th scope="col">Genre</th><th scope="col">Edit/Delete</th></tr>';
 
         mangaData.forEach((manga) => {
             table.innerHTML += `<tr>
                        <th scope="row">${manga.id}</th>
                        <td>${manga.Title}</td>
                        <td>${manga.Chapter}Ch</td>
+                       <td>Rp${manga.Tarif}</td>
                        <td>${manga.Status}</td>
                        <td>${manga.ReleaseDate}</td>
                        <td>${manga.Sinopsis}</td>
