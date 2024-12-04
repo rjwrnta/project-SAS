@@ -24,14 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
         formGroups.forEach((group, index) => {
             group.classList.toggle('active', index === currentStep);
         });
-        prevButton.disabled = currentStep === 0;
+        prevButton.textContent = currentStep === 0 ? 'Back' : 'Back';
         nextButton.textContent = currentStep === formGroups.length - 1 ? 'Submit' : 'Next';
     }
 
-    // prevButton.addEventListener('click', () => {
-    //     if (currentStep > 0) currentStep--;
-    //     updateForm();
-    // });
+    prevButton.addEventListener('click', () => {
+        if (currentStep > 0){
+            currentStep--;
+            updateForm();
+        } else {
+            window.location.href = 'index.html'
+        }
+    });
 
     nextButton.addEventListener('click', async () => {
         if (currentStep < formGroups.length - 1) {
