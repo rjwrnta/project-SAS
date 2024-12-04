@@ -119,21 +119,39 @@
                 <label for="title">Judul</label>
                 <input type="text" id="title" name="title" placeholder="Masukkan judul" required>
             </div>
+<<<<<<< HEAD
 
             <div class="form-group">
                 <label for="synopsis">Sinopsis</label>
                 <textarea id="synopsis" name="synopsis" placeholder="Masukkan sinopsis"></textarea>
             </div>
 
+=======
+            
+>>>>>>> fc3e47f4efa8d1e3de9c76a053c490ca84e69a12
             <div class="form-group">
                 <label for="chapter">Chapter</label>
                 <input type="number" id="chapter" name="chapter" placeholder="Masukkan jumlah chapter" required>
             </div>
             <div class="form-group">
+<<<<<<< HEAD
                 <label for="Rilis">Rilis</label>
                 <input type="number" id="Rilis" name="Rilis" placeholder="Masukkan tgl" required>
             </div>
 
+=======
+              <label for="Rilis">Rilis</label>
+              <input type="date" id="Rilis" name="Rilis" placeholder="Masukkan jumlah Rilis" required>
+          </div>
+          <div class="form-group">
+            <label for="chapter-Eps">Chapter -Eps</label>
+            <input type="number" id="chapter-Eps" name="chapter-Eps" placeholder="Masukkan jumlah chapter-Eps" required>
+        </div>
+        <div class="form-group">
+          <label for="duration">Durasi</label>
+          <input type="time" id="duration" name="duration" placeholder="Masukkan jumlah duration" required>
+      </div>
+>>>>>>> fc3e47f4efa8d1e3de9c76a053c490ca84e69a12
             <div class="form-group">
                 <label for="status">Status</label>
                 <select id="status" name="status" required>
@@ -163,7 +181,7 @@
             <!-- Step 3 (Harusnya) -->
             <div class="form-group">
                 <label>Genre</label>
-                <div class="checkbox-group">
+                <div class="checkbox-group" id="genre">
                     <label><input type="checkbox" name="genre" value="Action"> Action</label>
                     <label><input type="checkbox" name="genre" value="Adventure"> Adventure</label>
                     <label><input type="checkbox" name="genre" value="Comedy"> Comedy</label>
@@ -174,43 +192,25 @@
                     <label><input type="checkbox" name="genre" value="Isekai"> Isekai</label>
                 </div>
             </div>
-
             <div class="form-navigation">
-                <button type="button" id="prevButton" disabled>Back</button>
+                <button type="button" id="prevButton">Back</button>
                 <button type="button" id="nextButton">Next</button>
             </div>
         </form>
     </div>
 
+    <script src="./axios.js"></script>
+    <script src="./fungsiCRUD.js"></script>
+
     <script>
-        const formGroups = document.querySelectorAll('.form-group');
-        const prevButton = document.getElementById('prevButton');
-        const nextButton = document.getElementById('nextButton');
-        let currentStep = 0;
-
-        function updateForm() {
-            formGroups.forEach((group, index) => {
-                group.classList.toggle('active', index === currentStep);
-            });
-            prevButton.disabled = currentStep === 0;
-            nextButton.textContent = currentStep === formGroups.length - 1 ? 'Submit' : 'Next';
+       window.onload = () => {
+        const mangaID = getQueryParam('id')
+        console.log(mangaID)
+        if(mangaID){
+            changeManga(mangaID)
+            // add event listener ke form submit untuk update
         }
-
-        prevButton.addEventListener('click', () => {
-            if (currentStep > 0) currentStep--;
-            updateForm();
-        });
-
-        nextButton.addEventListener('click', () => {
-            if (currentStep < formGroups.length - 1) {
-                currentStep++;
-                updateForm();
-            } else {
-                document.getElementById('mangaForm').submit();
-            }
-        });
-
-        updateForm();
+       }
     </script>
 </body>
 </html>
