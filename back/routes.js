@@ -1,5 +1,7 @@
+// Import handler dari file handler.js
 const handler = require('./handler');
 
+// Daftar routes untuk server
 const routes = [
     {
         method: 'GET',

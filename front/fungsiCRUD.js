@@ -1,45 +1,56 @@
 console.log('fungsiCRUD.js terpanggil')
+// variabel untuk mengambil element html berdasarkan ID
 const formManga = document.getElementById('mangaForm');
 
-
+// fungsi untuk mendapatkan ID
 function getQueryParam(param) {
-    const urlParam = new URLSearchParams(window.location.search)
-    const id = urlParam.get(param)
+    const urlParam = new URLSearchParams(window.location.search) // mencari ID dengan WindowLocationSearch
+    const id = urlParam.get(param) // mendapat ID dari UrlParam
     if (!id) {
-        console.log('ID tidak ditemukan di URL')
-        // alert('ID tidak valid')
-        return null
+        console.log('ID tidak ditemukan di URL') // memberikan log jika ID tidak ditemukan
+        return null // mengembalikan null jika ID tidak ada
     }
 
-    return id
+    return id // mengembalikan nilai jika ID ditemukan
 }
 
+// menunggu seluruh konten DOM selesai dimuat
 document.addEventListener('DOMContentLoaded', () => {
+    // mengambil element form dan tombol navigasi
     const formGroups = document.querySelectorAll('.form-group');
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
     let currentStep = 0;
+    // menyimpan langkah form aktif saat ini, 0 berarti langkah pertama
 
+    // fungsi untuk memperbarui tampilan form berdasarkan langkah
     function updateForm() {
         formGroups.forEach((group, index) => {
             group.classList.toggle('active', index === currentStep);
+            // mengaktifkan grup form yang sesuai dengan langkah saat ini
         });
+        // mengubah teks tombol navigasi berdasarkan langkah
         prevButton.textContent = currentStep === 0 ? 'Back' : 'Back';
         nextButton.textContent = currentStep === formGroups.length - 1 ? 'Submit' : 'Next';
     }
 
+    // event listener untuk tombol back
     prevButton.addEventListener('click', () => {
         if (currentStep > 0){
             currentStep--;
+            // kembali ke langkah sebelumnya
             updateForm();
+            // memperbarui tampilan form
         } else {
             window.location.href = 'index.html'
+            // jika di langkah pertama, kembali ke halaman utama
         }
     });
 
+    // event listener untuk tombol next atau submit
     nextButton.addEventListener('click', async () => {
         if (currentStep < formGroups.length - 1) {
-            currentStep++;
+            currentStep++; // pindah ke langkah berikutnya
             updateForm();
         } else {
             const mangaId = getQueryParam('id')
@@ -47,15 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mangaId) {
                 console.log('EDITING')
                 await updateManga(mangaId)
+                // memperbarui data manga berdasarkan ID yang diberikan
             } else {
+                // ketika tidak tersedia mangaID maka tambah
                 console.log('Add New')
                 await addManga()
+                // menambah manga baru
             }
         }
     });
 
+    // fungsi untuk menambah manga baru
     const addManga = async () => {
         console.log('fungsi addManga terpanggil')
+        // mengambil data dari input form berdasarkan ID element
         const Title = document.getElementById('title').value;
         const Chapter = document.getElementById('chapter').value;
         const Status = document.getElementById('status').value;
@@ -64,16 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const MangaWriter = document.getElementById('writer').value;
         const ChapterPerEpisode = document.getElementById('chapter-Eps').value;
         const Duration = document.getElementById('duration').value;
+        // mengumpulkan genre yang dipilih
         const selectGenre = [];
         document.querySelectorAll('input[name="genre"]:checked').forEach((checkbox) => {
             selectGenre.push(checkbox.value);
         });
 
         try {
+            // menmgirim data manga baru ke server menggunakan axios
             const response = await axios.post('http://localhost:3000/manga/create', {
                 Title,
                 Chapter,
-                Tarif: parseInt(Chapter) * 10000,
+                Tarif: parseInt(Chapter) * 10000, // tarif dihitung berdasarkan jumlah chapter
                 Status,
                 ReleaseDate,
                 Sinopsis,
@@ -84,30 +102,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.data.status === 'success') {
-                // alert('Manga berhasil Ditambahkan');
-                formManga.reset();
-                window.location.href = 'index.html'
+                formManga.reset(); // mereset form jika sukses menambah data
+                window.location.href = 'index.html' // kembali ke halaman utama
             } else {
                 alert('Manga Gagal Ditambahkan');
             }
         } catch (error) {
-            console.error('error add manga:', error);
+            console.error('error add manga:', error); // log jika terjadi kesalahan
             alert('Terjadi Kesalahan Saat Menambahkan Manga')
         }
     }
 
 })
 
+// fungsi untuk menampikan manga
 const fetchManga = async () => {
     console.log('fungsi fetchManga terpanggil')
     try {
+        // mengirim request GET ke server untuk mengambil data manga
         const response = await axios.get('http://localhost:3000/manga');
-        const mangaData = response.data.data.dataManga;
+        const mangaData = response.data.data.dataManga; // mengambil data manga dari response
 
-        const table = document.getElementById('tabel');
+        const table = document.getElementById('tabel'); // mengambil element tabel menggunakan ID element
+        // meng inner/ mengambil dari tabel dari html
         table.innerHTML = '<tr><th scope="col">Id</th><th scope="col">Title</th><th scope="col">Chapter</th><th scope="col">Tarif</th><th scope="col">Status</th><th scope="col">Release Date</th><th scope="col">Sinopsis</th><th scope="col">Manga Writer</th><th scope="col">Chapter Per Episode</th><th scope="col">Duration</th><th scope="col">Genre</th><th scope="col">Edit/Delete</th></tr>';
 
         mangaData.forEach((manga) => {
+            // untuk menambah data yang ditambahkan dari server
             table.innerHTML += `<tr>
                        <th scope="row">${manga.id}</th>
                        <td>${manga.Title}</td>
@@ -127,15 +148,19 @@ const fetchManga = async () => {
                      </tr>`;
         });
 
+        // memanggil fungsi agar tombol edit dan delete berfungsi/aktif
         addEventListener();
 
     } catch (error) {
-        console.error('error fetch manga:', error);
+        console.error('error fetch manga:', error); // log jika terjadi kesalahan
     }
 };
 
+// fungsi agar tombol edit dan delete berfungsi/aktif
 const addEventListener = () => {
+    // mengambil semua yang ada di element
     document.querySelectorAll('.btn-delete').forEach((button) => {
+        // menambah event, jika button di click, maka akan mencari id yang ada di button
         button.addEventListener('click', (e) => {
             const id = e.target.dataset.id;
             const confirmDelete = confirm('Yakin Ingin Menghapus Manga Ini?')
