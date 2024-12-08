@@ -28,6 +28,18 @@ const createMangaHandler = (request, h) => {
     const createAt = new Date().toISOString;
     const updateAt = createAt;
     // Memproses genre menjadi array
+
+    let tarif = parseInt(Chapter) * 10000;
+    if (Chapter > 5000){
+        tarif *= 0.8;
+    } else if(Chapter > 1000){
+        tarif *= 0.88;
+    } else if(Chapter > 500){
+        tarif *= 0.93;
+    } else if(Chapter > 100){
+        tarif *= 0.97;
+    }
+
     const genreArray = Array.isArray(Genre)
         ? Genre
         : Genre.split(',').map((g) => g.trim());
@@ -36,7 +48,7 @@ const createMangaHandler = (request, h) => {
         id,
         Title,
         Chapter,
-        Tarif: parseInt(Chapter) * 10000,// Memproses genre menjadi array
+        Tarif: Math.round(tarif), // membulatkan tarif ke bilangan bulat
         Status,
         Genre: genreArray,
         Sinopsis,
@@ -135,11 +147,22 @@ const changeMangaHandler = (request, h) => {
 
     if (index !== -1) {
         // Mengupdate data manga
+        let tarif = parseInt(Chapter) * 10000;
+        if (Chapter > 5000){
+            tarif *= 0.8;
+        } else if(Chapter > 1000){
+            tarif *= 0.88;
+        } else if(Chapter > 500){
+            tarif *= 0.93;
+        } else if(Chapter > 100){
+            tarif *= 0.97;
+        }
+
         dataManga[index] = {
             ...dataManga[index],
             Title,
             Chapter,
-            Tarif: parseInt(Chapter) * 10000, // Tarif dihitung ulang
+            Tarif: Math.round(tarif), // tarif dihitung ulang
             Status,
             Genre: genreArray,
             Sinopsis,

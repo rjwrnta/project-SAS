@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('fungsi addManga terpanggil')
         // mengambil data dari input form berdasarkan ID element
         const Title = document.getElementById('title').value;
-        const Chapter = document.getElementById('chapter').value;
+        const Chapter = parseInt(document.getElementById('chapter').value);
         const Status = document.getElementById('status').value;
         const ReleaseDate = document.getElementById('Rilis').value;
         const Sinopsis = document.getElementById('synopsis').value;
@@ -86,12 +86,23 @@ document.addEventListener('DOMContentLoaded', () => {
             selectGenre.push(checkbox.value);
         });
 
+        let tarif = parseInt(Chapter) * 10000;
+        if (Chapter > 5000){
+            tarif *= 0.8;
+        } else if(Chapter > 1000){
+            tarif *= 0.88;
+        } else if(Chapter > 500){
+            tarif *= 0.93;
+        } else if(Chapter > 100){
+            tarif *= 0.97;
+        }
+
         try {
             // menmgirim data manga baru ke server menggunakan axios
             const response = await axios.post('http://localhost:3000/manga/create', {
                 Title,
                 Chapter,
-                Tarif: parseInt(Chapter) * 10000, // tarif dihitung berdasarkan jumlah chapter
+                Tarif: Math.round(tarif), // tarif dihitung berdasarkan jumlah chapter
                 Status,
                 ReleaseDate,
                 Sinopsis,
@@ -231,10 +242,23 @@ const changeManga = async (id) => {
 }
 
 const updateManga = async (id) => {
+    let Chapter = parseInt(document.getElementById('chapter').value);
+    let tarif = Chapter * 10000
+    if (Chapter > 5000){
+        tarif *= 0.8;
+    } else if(Chapter > 1000){
+        tarif *= 0.88;
+    } else if(Chapter > 500){
+        tarif *= 0.93;
+    } else if(Chapter > 100){
+        tarif *= 0.97;
+    }
+
     try {
         const updateManga = {
             Title: document.getElementById('title').value,
-            Chapter: document.getElementById('chapter').value,
+            Chapter,
+            Tarif: Math.round(tarif), // mengirim tarif yang sudah dihitung dengan diskon
             Status: document.getElementById('status').value,
             ReleaseDate: document.getElementById('Rilis').value,
             Sinopsis: document.getElementById('synopsis').value,
